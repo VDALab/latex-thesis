@@ -1,0 +1,18 @@
+This dissertation presents an analog automation flow and design migration methodology
+%both nonuniversal and universal approaches that improve the performance of short-length Luby Transform (LT) codes with applications to multimedia communication. The key idea is to increase the expected \emph{output ripple size} to prevent Belief-Propagation (BP) decoding process from terminating prematurely. The nonuniversal approach with Soliton-based distribution and randomness-limited encoding scheme is discussed first. Then the universal approach is investigated focusing on constructing degree distributions with respect to the output ripple size.
+
+
+%, where the output ripple size is the number of degree-$1$ output symbols
+
+
+%LT codes have been proved to be capacity-achieving on erasure channels. The performance of these codes is dominated by the code length and the design of the degree distribution. The state of the art robust Soliton distribution (RSD) is designed for asymptotic optimality and widely used in communication systems. As the code length decreases, however, the performance of LT codes using RSD degrades. This is because the output ripple size becomes smaller and more likely to decrease to zero during early stage, leading to frequent premature decoding termination. As a result, RSD is unsuitable for multimedia communication, which typically involves transmission of small or segmented data, such as music files and Group of Pictures (GOP) in a coded video.
+
+
+% since its expected output ripple size is relatively small during early decoding stage where decoding terminations 
+
+
+%In the nonuniversal approach, we increase the degree-$1$ proportion in RSD. The output ripple size becomes larger accordingly, and the problem of premature decoding termination is then relieved. The proportion of low degrees, except for degree-$1$, is also decreased to reduce the number of redundant output symbols. In addition, we introduce \emph{Non-Repetitive} (NR) encoding scheme to avoid generating repeated degree-$1$ output symbols. NR encoding scheme limits the randomness of the encoding process so that its performance depends on the channel condition. Moreover, we integrate multiple NR encoders to achieve Unequal Erasure Protection (UEP) for Scalable Video Coding (SVC) layers with different importance. Experimental results show that our UEP scheme outperforms previous studies in terms of the Peak Signal-to-Noise Ratio (PSNR).
+
+
+
+%In the universal approach, RSD is replaced by our proposed distributions. Meanwhile, we keep the encoding process intact to maintain the universality of LT codes. By minimizing objective functions under certain constraints, degree distributions can be constructed with their expected output ripple size approximating predetermined curves. Sequential Quadratic Programming (SQP) algorithm is employed to solve the minimization problem. Compared to RSD and previous works, our proposed ripple-based distribution (RBD) is able to reduce the average overhead needed to fully decode input symbols as well as the encoding and decoding complexity. Moreover, we record User Datagram Protocol (UDP) packet loss patterns over 802.11g WLAN and apply them to our simulations. The corresponding results show that the transmission efficiency can be improved by using RBD instead of RSD. Compared to RSD, RBD reduces the encoding and decoding complexity by at least $31.2\%$ and $25.4\%$, respectively.
