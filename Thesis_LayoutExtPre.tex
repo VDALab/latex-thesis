@@ -12,7 +12,7 @@
   \end{figure}
 
 
-  \section{Placement Constraints Extraction}\label{subsec:PlExtract}
+  \section{Placement Constraints Extraction}\label{sec:PlExtract}
 
     \begin{figure}[t]
       \begin{center}
@@ -31,7 +31,6 @@
     The major flow of placement constraints extraction \cite{ALP_YPWeng_iccad2011} is reviewed as follows:
     \subsection{Building Block Recognition}
       In order to reduce mismatch while generating layout, the principles of symmetrical and matching constraints should be considered as building blocks. 
-      %For symmetry constraints, there are three typical types should be addressed: a) 1D vertical symmetry, b) 1D horizontal symmetry and c) 2D symmetry. 
       Besides, Building blocks under the same matching constraints are identified by the existing netlist. Via pattern matching technique \cite{Massier_TCAD08} the preferable matching building blocks are generated.
 
     \subsection{Topological Slicing Tree Generation}
@@ -46,10 +45,6 @@
     \newcommand{\CCG}{\ensuremath{\mbox{\sc ConstCrossGraph}}}
     \renewcommand{\algorithmicrequire}{\textbf{Input:}}
     \renewcommand{\algorithmicensure}{\textbf{Output:}}
-    %\algloopdefx{RETURN}[1][]{\textbf{return} #1}
-    %\algblockdefx{FORALLP}{ENDFAP}[1]%
-    %{\textbf{for all }#1 \textbf{do in parallel}}%
-    %{\textbf{end for}}
     \begin{algorithm}[hbt]  
       \caption{$\CCG(P,B,V_{RP})$}\label{alg:CCG}                       
       \begin{scriptsize}
@@ -117,7 +112,7 @@
     In the end, the crossing graph stores not only the individual routing topology, but also the relative order of paths within each routing channel.
 
 
-  \section{Hierarchical Layout Extraction and Preservation}\label{subsec:HLE}
+  \section{Hierarchical Layout Extraction and Preservation}\label{sec:HLE}
 
     \begin{figure}[t]
       \begin{center}
@@ -136,7 +131,7 @@
 
     In order to reduce mismatches, the symmetry and proximity constraints need to be considered for both placement and routing. 
     For the given source layout, modules/devices are grouped as clusters according to the symmetry and proximity constraints, 
-    where the constraints can be either given by designers or extracted from the source layout as in Section~\ref{subsec:PlExtract}.
+    where the constraints can be either given by designers or extracted from the source layout as in Section~\ref{sec:PlExtract}.
 
     For each cluster, the routing behavior and correlation with placement blocks are analyzed based on the CDT of that cluster to build a corresponding crossing graph. 
     Crossing graphs of clusters are constructed bottom-up along the hierarchical structure. 
