@@ -1,0 +1,11 @@
+*.aux
+*.bbl
+*.toc
+*.log
+*.lof
+*.fdb_latexmk
+*.synctex.gz
+*.blg
+*.lot
+Thesis.pdf
+BiauKai.ttf
