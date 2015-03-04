@@ -7,5 +7,6 @@
 *.synctex.gz
 *.blg
 *.lot
+*.synctex.gz(busy)
 Thesis.pdf
 BiauKai.ttf
