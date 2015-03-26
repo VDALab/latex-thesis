@@ -1,0 +1,107 @@
+%!TEX root = Thesis.tex
+\chapter{Hierarchical Constraint driven Routing Framework}\label{chap:hcdr}
+    In this chapter, we introduce a divide-and-conquer approach methodology for analog constraint driven routing as Algorithm~\ref{alg:HCDR} hierarchical constraint driven routing(HCDR) depicts. The basic idea of our methodology is to partition the layout recursively according to constraint group we have generated in previous section. Once the recursion reaches the bottom level of the layout, a priority-free routing for each level of design is applied. We terminate the process when the top level of layout is routed. 
+
+  \section{Hierarchical Framework}\label{sec:HierFramework}
+
+    For a hierarchical constraint driven routing, an analog layout design accompanied with constraint group is required. The constraint group is generated from the technology process rules and analog design guidelines we have mentioned in Section~\ref{chap:cg}. First of all, HCDR retrieves constraints one by one from the constraint group. If it is a symmetrical constraint, HCDR splits the symmetry pair and applies sub-level HCDR for them. Similarly, if it is matching constraint, HCDR straightly partitions the existing layout into one matching group and the other. In the end of layout partitioning, we apply a routing-engine in a bottom-up style until the overall layout is fully connected. The common notations used in the rest of this paper are listed in Table~\ref{tableNotation}.
+
+  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+  \renewcommand{\algorithmiccomment}[1]{// #1}
+  \newcommand{\HCDR}{\ensuremath{\mbox{\sc HCDR}}}
+  \begin{algorithm}[t]
+  \caption{$\HCDR(T,CG_T,N)$}\label{alg:HCDR}
+  \begin{algorithmic}[1]
+    %\begin{footnotesize}
+  \REQUIRE T: Top-level Design with cells 
+
+  $CG_T$: Constraint-group of the top-level design.
+
+  N: a list of nets w.r.t. the top-level design.
+  \ENSURE $T^r$ : Top-level design after routing.
+  \medskip
+
+  \WHILE {$num(CG_T) \geq 1$}
+    \STATE $Con \gets pop(CG_T) $
+    \IF{$Con \in SymCon$}   
+      \STATE $(SymGrp,T') \gets partition(T,Con)$
+      \STATE $({SymGrp}_L,CG_L) \gets getLeft(SymGrp,Con,CG_T)$
+      \STATE $({SymGrp}_R,CG_R) \gets getRight(SymGrp,Con,CG_T)$
+      \STATE ${CG}_L \gets getCG({SymGrp}_L,Con,CG_T)$
+      \STATE ${CG}_R \gets getCG({SymGrp}_R,Con,CG_T)$
+      \STATE $T^r \gets merge(T^r,\HCDR({SymGrp}_L,CG_L,N))$
+      \STATE $T^r \gets merge(T^r,\HCDR({SymGrp}_R,CG_R,N))$
+      \STATE $T = T'$
+    \ELSIF {$CG \in MatchCon$}      
+      \STATE $(MatchGrp,CG_M,T') \gets partition(T,Con)$
+      \STATE $CG_M \gets getCG(MatchGrp,Con,CG_T)$
+      \STATE $T^r \gets merge(T^r,HCDR(MatchGrp,CG,N))$
+      \STATE $T = T'$
+    \ENDIF
+  \ENDWHILE
+  \STATE $T^r \gets merge(T^r,T)$
+  \STATE $T^r \gets route(T^r,CG_T,N)$
+  \RETURN $T^r$ \COMMENT{Terminate when $T^r$ is routed}
+  %\end{footnotesize}
+  \end{algorithmic}
+  \end{algorithm}
+
+    \begin{table}[ht]
+      \centering
+      \vspace{-1em}
+    %\setlength{\abovecaptionskip}{0pt}
+    %\setlength{\belowcaptionskip{10pt}
+    \caption{Notations used in HCDR}
+      % 
+    %\begin{spacing}{1}
+    \begin{scriptsize}
+    \begin{tabular}[t]{|l|l|}
+      \hline
+      $T$       & Top-level Design with cell blocks \\
+      \hline
+      $T'$      &   design T after partition      \\
+      \hline
+      $T^r$       &   T with partial routing completed  \\
+      \hline
+      $CG_T$      & Constraint group of the current level design  \\
+      \hline
+      $N$       & list of connectivity w.r.t. the design T  \\
+      \hline
+      $Con  $   & constraint pop out from $CG_T$    \\
+      \hline
+      $SymCon$    & symmetrical constraint in $CG_T$  \\
+      \hline
+      $MatchCon$    & matching constraint in $CG_T$   \\
+      \hline
+      $getCG$     & obtaining constraint group for partitioned design \\
+      \hline
+      $SymGrp$    & symmetrical group described in SymCon \\
+      \hline
+      $MatchGrp$    & matching group described in MatchCon  \\
+      \hline
+      $num(CG_T)$   & total number of constraints in $CG_T$ \\
+      \hline
+    \end{tabular}
+    \end{scriptsize}
+    %\end{spacing}
+    \label{tableNotation}
+    \end{table}
+    \vspace{-1em}
+
+
+  \section{Symmetrical and Matching Group Partition}\label{sec:SMGrp}
+    
+    If HCDR encounters a symmetry constraint, the current design should be partitioned into two parts, which are the symmetrical group and another group. The symmetrical group consists of the left group $SymGrp_L $ and the right group $SymGrp_R$. Also, the constraint group for left and right groups are extracted from the current top-level constraint group. We continue to perform HCDR recursively for both of them. Since the HCDR returns a routed layout after termination, we then merge the symmetry pair into $T^r$. Each part of $T_r$ is routed, and the final merge will be performed. 
+
+  %\subsection{Matching Group}
+    When the popped  constraint is matching constraint, similar to symmetrical group division, HCDR tends to distribute the existing layout according to the matching constraints. In each iteration, HCDR splits a MatchGrp from the layout and then performs the next level HCDR of such sub-design. After a routed design is returned from the child's HCDR, it is merged into $T_r$. Until all the symmetric and matching groups are completed, the rest parts of the design are routed.
+
+  \subsection{Bottom-up Routing}\label{sec:HCDR_BtmUp}
+
+    When there is no constraint left in the constraint group for partitioning, we apply a merge routing mechanism to connect all the nets in the current level of HCDR. Since the routing algorithm is applied in hierarchical way, HCDR only deal with the connectivity between the cells in the current level. In case of routing between two groups, such as one $SymGrp_L$ and another $SymGrp_R$, the routing is utilized for the inter-pins among groups. The intra-pin routing is completed by the lower level HCDR. Since the routing order is decided by the constraint group generation step, it is possible to cause violation after merging into $T_r$. For the sake of avoiding to overlap with other group of layout, the routing region of the current level HCDR is fixed to the contour outside the blocks. 
+
+  In summary, HCDR performs a divide-and-conquer approach for hierarchical routing w.r.t. the routing order which is determined in the constraint group. However, A net with mutiple pins in different constraint groups are routed with trivial detour. Even though divide-and-conquer approach for routing lose optimal wirelength due to the hierarchical structure, the process variation issue will be reduced by following critical analog constraints at routing stage. Additionally, Since the constraint group can be preserved before the routing stage, it is configurable that HCDR is able to generate different routing results by manipulating the structure of such constraint group. This paper illustrates the comparison in Section~\ref{sec:exp}. The top-down flow divides the layout design and the bottom-up flow routes the design by each level. Note that, if the constraint group is defined in another kind of grouping order for the layout, the routing result will be different.
+
+
+    
