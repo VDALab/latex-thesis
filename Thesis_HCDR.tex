@@ -4,7 +4,7 @@
 
   \section{Hierarchical Framework}\label{sec:HierFramework}
 
-    For a hierarchical constraint driven routing, an analog layout design accompanied with constraint group is required. The constraint group is generated from the technology process rules and analog design guidelines we have mentioned in Section~\ref{chap:cg}. First of all, HCDR retrieves constraints one by one from the constraint group. If it is a symmetrical constraint, HCDR splits the symmetry pair and applies sub-level HCDR for them. Similarly, if it is matching constraint, HCDR straightly partitions the existing layout into one matching group and the other. In the end of layout partitioning, we apply a routing-engine in a bottom-up style until the overall layout is fully connected. The common notations used in the rest of this paper are listed in Table~\ref{tableNotation}.
+    For a hierarchical constraint driven routing (HCDR), an analog layout design accompanied with constraint group is required. The constraint group is generated from the technology process rules and analog design guidelines we have mentioned in Section~\ref{chap:cg}. First of all, HCDR retrieves constraints one by one from the constraint group. If it is a symmetrical constraint, HCDR splits the symmetry pair and applies sub-level HCDR for them. Similarly, if it is matching constraint, HCDR straightly partitions the existing layout into one matching group and the other. In the end of layout partitioning, we apply a routing-engine in a bottom-up style until the overall layout is fully connected. The common notations used in the rest of this paper are listed in Table~\ref{tableNotation}.
 
   \renewcommand{\algorithmicrequire}{\textbf{Input:}}
   \renewcommand{\algorithmicensure}{\textbf{Output:}}
