@@ -1,17 +1,17 @@
 %!TEX root = Thesis.tex
                                             
-\section{Effective Probabilistic Fine Tuning}\label{sec:pss}
+\section{Effective Probabilistic Simulation}\label{sec:ProbSimu}
 
 
   The final refinement performs a full-circuit stochastic simulation. Although we obtain a set of potential design variables from Section~\ref{sec:reTarg}, these do not represent the optimal solution. The final refinement performs simulation to prevent the solution from any non-ideal effects via higher-level abstraction. After {\it Design Re-targeting}, a set of overall device level variable values $\Psi $ are collected. $N_{V^D}$ collects the number of all device variables type. Since these design variables are selected by performance exploration via transformation, each population of performance metrics directly projects to a set of variable distribution. Basically, $\Psi$ provides the variable space for perturbation. By swapping among device-level parameters, the cost of full-circuit simulation is reduced. By employing global optimization algorithm, such as random walk or simulated annealing, the entire circuit is re-constructed and fed into circuit simulator using real models and parameters from the foundry.
 
-  \begin{figure}[t]
+  \begin{figure}[ht]
       \centering
       \begin{subfigure}[t]{0.4\textwidth}
-        \includegraphics[width=\textwidth]{Fig/popSampling.eps}
+        \includegraphics[width=\textwidth]{Fig/Chapter2/popSampling.eps}
       \end{subfigure}
       \begin{subfigure}[t]{0.4\textwidth}
-        \includegraphics[width=\textwidth]{Fig/norPopDis.eps}
+        \includegraphics[width=\textwidth]{Fig/Chapter2/norPopDis.eps}
       \end{subfigure}
       \caption
       {
@@ -30,7 +30,7 @@
   \algblockdefx{FORALLP}{ENDFAP}[1]%
     {\textbf{for all }#1 \textbf{do in parallel}}%
     {\textbf{end for}}
-  \begin{algorithm}[t]  
+  \begin{algorithm}[ht]  
     \caption{$\PFTS(T,T_{freeze}, \Psi, r, N_s)$}\label{alg:PFTS}                       
     \begin{scriptsize}
       \begin{algorithmic}[1]
@@ -144,7 +144,7 @@
 
   \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{Fig/NorPDFSwap.eps}
+    \includegraphics[width=0.7\textwidth]{Fig/NorPDFSwap.eps}
     \caption{Swap behavior dominated by probabilistic in PDF of $V^D_m$} 
     \label{fig:NorPDFSwap}
   \end{figure}

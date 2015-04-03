@@ -1,10 +1,11 @@
 %!TEX root = Thesis.tex
 
   \section{Performance Space Exploration with Parallel Genetic Algorithm}\label{sec:pga}
+
     
     \begin{figure}[t]
       \centering
-      \includegraphics[width=\textwidth]{Fig/Gene.eps}
+      \includegraphics[width=\textwidth]{Fig/Chapter2/Gene.eps}
       \caption{Demonstration of genetic representation for performance metrics.} 
       \label{fig:Gene}
     \end{figure}
@@ -43,7 +44,7 @@
   
     In every optimization process, one performance metric results in a set of performance metric ($r_1 ,\ldots, r_k$) corresponding to the given specification of performance($z_1,\ldots,z_k$). Therefore, according to the same design equation for optimization, it is an one to one mapping relationship from spec to result of performance and the corresponding circuit-level design variables. 
 
-    To extend the optimization range. Each $z_k$ can be varied with a range of value, that is, we define a maximum value of $z_{kMAX}$ and one minimum value of $z_{kmin}$ with several step value between them. Therefore, we can investigate the performance limitation for $z_k$ by implementing optimization on a series of $z_k$, $z_k=\{z_{ki}| 1 \leq i \leq |z_k|, z_{kMAX} \leq z_{ki} \leq z_{kmin} \}$. Obviously, a set of different performance types with a range of such values are similar to chromosome concept in heredity. As we can see in Fig.~\ref{fig:Gene}, if every chromosome carries different value of every performance metric $z_k$. An evolutionary computing with genetic algorithm for traversing solution space can be employed for traversing optimized multi-objective problem. As mentioned in Section~\ref{sec:PGAIntro}, we further utilize the {\it Parallel Genetic Algorithm} to develop with. The detail implementation is as follows:
+    To extend the optimization range. Each $z_k$ can be varied with a range of value, that is, we define a maximum value of $z_{kMAX}$ and one minimum value of $z_{kmin}$ with several step value between them. Therefore, we can investigate the performance limitation for $z_k$ by implementing optimization on a series of $z_k$, $z_k=\{z_{ki}| 1 \leq i \leq |z_k|, z_{kMAX} \leq z_{ki} \leq z_{kmin} \}$. Obviously, a set of different performance types with a range of such values are similar to chromosome concept in heredity. As we can see in Fig.~\ref{fig:Gene}, if every chromosome carries different value of every performance metric $z_k$. An evolutionary computing with genetic algorithm for traversing solution space can be employed for traversing optimized multi-objective problem. As mentioned in Section~\ref{subsec:PGAIntro}, we further utilize the {\it Parallel Genetic Algorithm} to develop with. The detail implementation is as follows:
 
     
 
@@ -55,7 +56,7 @@
 
       \begin{figure}[t]
         \centering
-        \includegraphics[width=\textwidth]{Fig/MultiSpec.eps}
+        \includegraphics[width=0.5\textwidth]{Fig/Chapter2/MultiSpec.eps}
         \caption{Illustration of performance characteristic (e.g., Av, Pdc, Pout, BW, Fcent, etc.) for each circuit.} 
         \label{fig:MultiSpec}
       \end{figure}
@@ -154,7 +155,7 @@
     
       \begin{figure}[t]
         \centering
-        \includegraphics[width=\textwidth]{Fig/PAGEflowchart.eps}
+        \includegraphics[width=0.7\textwidth]{Fig/Chapter2/PAGEflowchart.eps}
         \caption{Coarse-grained parallel genetic approach from major population P to partitioned population $P_i$ for parallel evolution. The migration step benefits each sub-population on diversity every iteration.} 
         \label{fig:PGAFlow}
       \end{figure}
@@ -203,7 +204,7 @@
   
       \begin{figure}[t]
         \centering
-        \includegraphics[width=\textwidth]{Fig/PAGEMigration.eps}
+        \includegraphics[width=0.7\textwidth]{Fig/Chapter2/PAGEMigration.eps}
         \caption{When sub-population $P_2$ and sub-population $P_4$ perform migration operation with migration rate $M_P$, $P_2$ sends its best individual with respect to spec type $P_4$, and the receiving sub-population $P_4$ replaces its worst individual with respect to its own spec type $P_4$.} 
         \label{fig:Migration}
       \end{figure}
