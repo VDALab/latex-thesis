@@ -1,5 +1,22 @@
 %!TEX root = Thesis.tex
 
 \chapter{Conclusions and Future Works}\label{chap:CFW}
+
   \section{Conclusions}\label{sec:Conclusion}
+
+    This dissertation presents a methodology of analog circuit optimization, an unification of analog design constraints and a framework of analog layout migration. 
+
+    \begin{itemize}
+      \item In analog circuit design procedure, front-end synthesis and physical layout generation play distinctive roles to optimize the circuit performance. On circuit synthesis phase, in order to figure out the limitation of the manufacturing technology for circuit sizing, we develop a performance exploration methodology via parallel genetic algorithm. The analog sizing problem is simplified into a searching process. First of all, a potential performance space for optimized solution is explored based on parallel genetic algorithm. Later, such converged performance space is transferred into device-variable domain for a probabilistic simulation. A RFDA and an Op-Amp circuit are practiced to demonstrate the experimental results. Our proposed approach efficiently reduces the runtime and obtains qualified performance. 
+      \item Between the gap of netlist and layout design, the constraints according to circuit design are critical to layout generation. The LDEs from advanced manufacturing technology of integrated circuit are also decisive to layout performance. We propose an unified constraint group to integrate the technology and design constraints as guidelines for layout generation. The proposed HCDR reconfigures the analog routing order according to the unified constraint group. In addition, different combinations of constraint group generate routing by HCDR automatically. Our experiment results represent that analog layout with HCDR obtain better performance than non-constrained router especially on signal integrity. 
+      \item Template-based layout generation is widely-discussed in state-of-the-art of analog circuit automation. Given a existing analog layout design, we perform a rapid design migration framework to generate layout prototypes on the targeting technology. We firstly decompose the layout in placement and routing into slicing tree and crossing graph for preservation, and then a prototyping flow is implemented to generate multiple layout candidates efficiently. Additionally, a wire segment refine enhances the routing characteristics for better performance. The proposed approach is validated on a variable-gained amplifier, a folded-cascode Op-Amp and a low drop-out regulator. Experimental results shows that our approach preserves analog layout and migrates efficiently. The migrated layout reduce the effort of manual routing with at least on 75\% wirelength and 80\% on wire segments. As a result, this work speeds up at least 5 times over manual layout generation. 
+    \end{itemize}
+
   \section{Future Works}\label{sec:FW}
+
+
+    As the hardship of analog design expands in the advanced technology, the demand of LDE in prior-stage increase. To enhance the efficiency to explore the optimized performance is quite important. In Chapter~\ref{chap:PAGE}, the evolutionary methodology should take LDE into consideration. Moreover, the aging model of device can also be part of device fitting. 
+
+    In Chapter~\ref{chap:CUCLM}, even though the unified constraint groups can develop the analog routing for signal integrity, the idea can be combined with the migration framework in Chapter~\ref{chap:RLPADM}. Nonetheless, the future work will mainly focus on the extension of the configurable analog constraints like electromagnetic effect, and on the symbolic routing which adopting this configurable analog constraints with better performance.
+
+    In the end, the preserved representation of analog layout is divided into placement and routing phase in Chapter~\ref{chap:RLPADM}. We will dedicate to develop an unified representation for layout preservation to simplify analog layout migration. Additionally, in order to automatically migrate analog layout, the completeness of prototyping layout still has space to develop. We plan to automatically generate the detailed components of each prototypes so that the efficiency of our migration will be boosted. 
