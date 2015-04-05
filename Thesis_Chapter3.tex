@@ -71,7 +71,7 @@
     \subsection{Pre-defined Design Guidelines Constraint Group Generation}\label{sec:PreDesignCG}
     %According to Fig.~\ref{fig:CG}, 
       
-      Except the ``foundry'' constraint groups, each design can create their own custom constraint group with arbitrary semantics. Thus, two different circuit designs which share the same technology constraint group tend to preserve totally diversed constraint groups with distinct design purposes. Moreover, even dissimilar objectives are applied on the same analog design w.r.t. the same technology for particular performance requirement. Thus, the flexibility of user-defined constraint groups is important to have. 
+      Except the ``foundry'' constraint groups, each design can create their own custom constraint group with arbitrary semantics. Thus, two different circuit designs which share the same technology constraint group tend to preserve totally diversed constraint groups with distinct design purposes. Moreover, even dissimilar objectives are applied on the same analog design with respect to the same technology for particular performance requirement. Thus, the flexibility of user-defined constraint groups is important to have. 
 
       Traditionally, experienced analog designers manually annotate design constraints on the schematic view. The constraints are mostly related to performance intention, such as symmetrical constraints, proximity group and net ordering. Nevertheless, due to non-unified annotation, the instruction made by the designers cannot be exchanged with a general data model. Here we standardize aforementioned analog constraints into OpenAccess constraint format. 
     
@@ -160,7 +160,7 @@
 
     \subsection{Hierarchical Framework}\label{sec:HierFramework}
 
-      For a hierarchical constraint driven routing (HCDR), an analog layout design accompanied with constraint group is required. The constraint group is generated from the technology process rules and analog design guidelines we have mentioned in Section~\ref{sec:ConGenUni}. First of all, HCDR retrieves constraints one by one from the constraint group. If it is a symmetrical constraint, HCDR splits the symmetry pair and applies sub-level HCDR for them. Similarly, if it is matching constraint, HCDR straightly partitions the existing layout into one matching group and the other. In the end of layout partitioning, we apply a routing-engine in a bottom-up style until the overall layout is fully connected. The common notations used in the rest of this paper are listed in Table~\ref{tableNotation}.
+      For a hierarchical constraint driven routing (HCDR), an analog layout design accompanied with constraint group is required. The constraint group is generated from the technology process rules and analog design guidelines we have mentioned in Section~\ref{sec:ConGenUni}. First of all, HCDR retrieves constraints one by one from the constraint group. If it is a symmetrical constraint, HCDR splits the symmetry pair and applies sub-level HCDR for them. Similarly, if it is matching constraint, HCDR straightly partitions the existing layout into one matching group and the other. In the end of layout partitioning, we apply a routing-engine in a bottom-up style until the overall layout is fully connected. The common notations used in the rest of this paper are listed in Symbol List.
 
       \renewcommand{\algorithmicrequire}{\textbf{Input:}}
       \renewcommand{\algorithmicensure}{\textbf{Output:}}
@@ -201,39 +201,39 @@
       \end{algorithmic}
       \end{algorithm}
 
-      \begin{table}[ht]
-        \centering
-        \caption{Notations used in HCDR}\label{tableNotation}
-        \begin{scriptsize}
-        \begin{tabular}[t]{|l|l|}
-          \hline
-          $T$       & Top-level Design with cell blocks \\
-          \hline
-          $T'$      &   design T after partition      \\
-          \hline
-          $T^r$       &   T with partial routing completed  \\
-          \hline
-          $CG_T$      & Constraint group of the current level design  \\
-          \hline
-          $N$       & list of connectivity w.r.t. the design T  \\
-          \hline
-          $Con  $   & constraint pop out from $CG_T$    \\
-          \hline
-          $SymCon$    & symmetrical constraint in $CG_T$  \\
-          \hline
-          $MatchCon$    & matching constraint in $CG_T$   \\
-          \hline
-          $getCG$     & obtaining constraint group for partitioned design \\
-          \hline
-          $SymGrp$    & symmetrical group described in SymCon \\
-          \hline
-          $MatchGrp$    & matching group described in MatchCon  \\
-          \hline
-          $num(CG_T)$   & total number of constraints in $CG_T$ \\
-          \hline
-        \end{tabular}
-        \end{scriptsize}
-      \end{table}
+      %\begin{table}[ht]
+      %  \centering
+      %  \caption{Notations used in HCDR}\label{tableNotation}
+      %  \begin{scriptsize}
+      %  \begin{tabular}[t]{|l|l|}
+      %    \hline
+      %    $T$       & Top-level Design with cell blocks \\
+      %    \hline
+      %    $T'$      &   design T after partition      \\
+      %    \hline
+      %    $T^r$       &   T with partial routing completed  \\
+      %    \hline
+      %    $CG_T$      & Constraint group of the current level design  \\
+      %    \hline
+      %    $N$       & list of connectivity w.r.t. the design T  \\
+      %    \hline
+      %    $Con  $   & constraint pop out from $CG_T$    \\
+      %    \hline
+      %    $SymCon$    & symmetrical constraint in $CG_T$  \\
+      %    \hline
+      %    $MatchCon$    & matching constraint in $CG_T$   \\
+      %    \hline
+      %    $getCG$     & obtaining constraint group for partitioned design \\
+      %    \hline
+      %    $SymGrp$    & symmetrical group described in SymCon \\
+      %    \hline
+      %    $MatchGrp$    & matching group described in MatchCon  \\
+      %    \hline
+      %    $num(CG_T)$   & total number of constraints in $CG_T$ \\
+      %    \hline
+      %  \end{tabular}
+      %  \end{scriptsize}
+      %\end{table}
 
 
     \subsection{Symmetrical and Matching Group Partition}\label{sec:SMGrp}
@@ -307,7 +307,7 @@
     \end{enumerate} 
     Our methodologies were implemented in C++ language with OpenAccess library version 2.2.04p54. We compile and execute our program on a workstation with AMD Phenom(tm) II X4 925 2.8GHz processor and 8GB memory under the Red Hat 4.6 Linux operation system. We apply an maze-route-style industrial engine in the bottom level routing which can considering the foundry level constraint simultaneously. We compare our methodology with high speed I/O interface of one industrial SoC chip design. Such SoC design includes a digital functional block, a clock-tree network and one analog block. There are 378 n-type and 362 p-type mosfets in this analog design with area 15.8x68.37 ${{\mu}m}^2$. This design is working on 40nm technology for supply voltage 1.1V. Since the design is confidential, we only show the routing information and post-layout simulation result for comparison.
 
-    As there is no previous work that handles analog routing based on constraint driven hierarchical module, we compare the performance by HSPICE simulation among schematic and the routing results. Moreover, to practice the functionally of our configurable constraint group, we provide the routing result with two compisitions of constraints, HCDR-PD and LCDR-LE. For our HSPICE simulation, we practice on two kinds of frequency with 3GHz and 4GHz. For the performance comparison, we first compare the design performance specification illustrated in Table \ref{table:HCDRResult}. Since the functionality of the analog block is the output stage of the digital block in the SoC chip, we tend to analyze the performance difference with {\bf Eye Diagram} of the output waveform for signal integrity. According to the measurements in~\cite{eyediagram}, the following parameters should be measured: {\bf Eye Height}, {\bf Peak-to-Peak(P-2-P) Jitter}, {\bf RMS Jitter}, {\bf Rise Slope} and {\bf Fall Slope} in the eye diagram of each pattern. For routing comparison, although flatten-routing obtained better wirelength than other routing methods, it violates process rule severely by DRC checking. 
+    As there is no previous work that handles analog routing based on constraint driven hierarchical module, we compare the performance by HSPICE simulation among schematic and the routing results. Moreover, to practice the functionally of our configurable constraint group, we provide the routing result with two compisitions of constraints, HCDR-PD and HCDR-LE. For our HSPICE simulation, we practice on two kinds of frequency with 3GHz and 4GHz. For the performance comparison, we first compare the design performance specification illustrated in Table \ref{table:HCDRResult}. Since the functionality of the analog block is the output stage of the digital block in the SoC chip, we tend to analyze the performance difference with {\bf Eye Diagram} of the output waveform for signal integrity. According to the measurements in~\cite{eyediagram}, the following parameters should be measured: {\bf Eye Height}, {\bf Peak-to-Peak(P-2-P) Jitter}, {\bf RMS Jitter}, {\bf Rise Slope} and {\bf Fall Slope} in the eye diagram of each pattern. For routing comparison, although flatten-routing obtained better wirelength than other routing methods, it violates process rule severely by DRC checking. 
     
     Furthermore, HCDR interacts with foundry constraint group well much fewer DRC errors. From this results, we can tell that the integrated foundry-intension constraints efficiently deals with advanced technology rules. In 3GHz simulation, other than manual-route, HCDR-LE achieves 13\%, 12.4\% and 7.7\% improvement for eye-height over flatten-route, pre-sim and HCDR-PD, respectively. Since eye-height represents the impact from signal-to-noise, the larger eye height(open-eye), the better signal integrity with voltage amplitude. RMS jitter and P-to-P jitter are required to be measured for jitter characterization. As expected, HCDR-LE have achieved remarkable success in RMS jitter. Additionally, HCDR-PD obtains P-to-P jitter reductions of 0.31ps, 0.58ps, 0.59ps and 0.24ps over pre-sim, manual-route, flatten-route and HCDR-LE, respectively. Since pre-defined constraint group for HCDR-PD honors the symmetrical constraint than matching constraint, we can tell that the matching net of symmetrical constraint guarantees lower variation. 
   
@@ -331,5 +331,5 @@
 
   \section{Summary}\label{sec:CUCLMSum}
 
-    In this chapter, we generate the uniform constraint format for analog constraint driven routing. We have proposed hierarchical constraint driven routing mechanism that is faithful to the constraint group we have generated. HCDR reconfigures the analog routing order according to constraints, then the bottom-up routing is applied w.r.t. the order of constraints. In addition to handling technology process rule, we not only generate the constraint from existing layout topology after placement, but also preserve the design guidelines by experienced designers for analog routing purpose. The methodology can be used to generate routing automatically with different combinations of constraint group. The future work will mainly focus on the extension of the configurable analog constraints like electromagnetic effect, and on the symbolic routing which adopting this configurable analog constraints with better performance
+    In this chapter, we generate the uniform constraint format for analog constraint driven routing. We have proposed hierarchical constraint driven routing mechanism that is faithful to the constraint group we have generated. HCDR reconfigures the analog routing order according to constraints, then the bottom-up routing is applied with respect to the order of constraints. In addition to handling technology process rule, we not only generate the constraint from existing layout topology after placement, but also preserve the design guidelines by experienced designers for analog routing purpose. The methodology can be used to generate routing automatically with different combinations of constraint group. The future work will mainly focus on the extension of the configurable analog constraints like electromagnetic effect, and on the symbolic routing which adopting this configurable analog constraints with better performance
 
