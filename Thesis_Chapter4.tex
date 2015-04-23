@@ -67,14 +67,12 @@
 
       This Section introduces a representation to preserve the routing correlation with placement. The routing preservation for analog layout is inspired from \cite{Chin_DMR_ICCAD2013}. We integrate the preservation strategy with placement accordingly. The routing channel can be decomposed into multiple triangles via CDT. Thus, the wire goes across one or more triangles on their edges. The representation which aims to record the "crossing" behavior among wires and triangular edges is denoted by a crossing graph. The crossing graph construction is demonstrated in the following paragraph. 
 
-      Fig.~\ref{fig:CGC} illustrates a routing preservation procedure and Algorithm~\ref{alg:CCG} {\it ConstCrossingGraph} represents it as a pseudocode. Given a layout plane $L$ with a set of placement blocks $B \in L$, where $B = \{b_i|1 \leq i \leq |B|\}$. As the layout without routing path shown in Fig.~\ref{fig:CGC}.(a), the set of corner points of blocks in $B$ are denoted by $V_C$ where $V_C = \{(x_i,y_i)|1 \leq i \leq 4|B|\}$, and the points on the periphery of routing plane (i.e. corners of the routing plane and the middle-points of each routing plane boundary) are denoted by $V_{PR}$. We define the vertex set of the layout extraction CDT to be $V_{CDT} = V_C \cup V_{RP}$ in line~\ref{line:VCDT}. Regions that forbid CDT edge are called {\it blocks} in CDT formulations. In our case, they are the areas inside blocks.
-
       \begin{figure}[t]
         \begin{center}
-        \includegraphics[width=\textwidth]{Fig/Chapter4/CGC.eps}
+        \includegraphics[width=0.7\textwidth]{Fig/Chapter4/CDT.eps}
         \caption{Illustration of routing preservation by CDT. 
           (a) The given design.
-          (b) Resultant CDT graph $G_{CDT}$.
+          (b) Resultant CDT graph.
           (c) CDT edges crossing with routing path are colored by red.
           (d) Crossing points of the two paths in routing plane.
           (e) Routing behavior is stored by CDT graph and the crossing points.}
@@ -82,65 +80,35 @@
         \end{center}
       \end{figure}
 
-      \newcommand{\CCG}{\ensuremath{\mbox{\sc ConstCrossGraph}}}
-      \begin{algorithm}[hbt]  
-        \caption{$\CCG(P,B,V_{RP})$}\label{alg:CCG}                       
-        \begin{scriptsize}
-          \begin{algorithmic}[1]
-            \REQUIRE 
-              \begin{tabular}{l}
-                $P$: The routing paths of layout\\
-                $B$: The placement blocks \\
-                $V_{RP}$: Corners of layout and the middle-points of each plane boundary\\ 
-              \end{tabular}
-            \ENSURE 
-              \begin{tabular}{l}
-                $T$: The triangles after CDT\\
-                $E_{CDT}$: The edges set of $G_{CDT}$\\
-                $V_{Cr}$: The set of crossing points between routing paths and $E_{CDT}$\\
-                $E_{Cr}$: The set of crossing edge\\
-                $G_{Cr}$: The crossing graph
-              \end{tabular}
-            \FOR {$i = 1 \to |B|$}
-              \STATE $V_C \gets v^{TR},v^{TL},v^{BR},v^{BL} $ \COMMENT{collect four corners into $V_C$}
-            \ENDFOR
-            \STATE $V_{CDT}\gets V_C, V_{RP}$  \label{line:VCDT}
-            \STATE $G_{CDT}(V_{CDT},E_{CDT},B,T) \gets CDT(V_{CDT},B)$  \COMMENT{constrained Delaunay triangulation} \label{line:GCDT}
-            \FOR {$i = 1 \to |P|$} \label{line:StartCross}
-              \STATE $E_{Cr}(p_i) \gets CheckCrossEdge(p_i,E_{CDT})$
-              \FOR {$j = 1 \to |E_{Cr}(p_i)|$}
-                \STATE $v(x,y) \gets FindCross({E_{Cr}(p_i)}_j)$
-                \STATE $q_1,q_2 \gets FindAdjacent({E_{Cr}(p_i)}_j,V_{CDT})$
-                \STATE $V_{Cr}(p_i) \gets v,q_1,q_2$
-              \ENDFOR
-              \STATE $E_{Cr} \gets E_{Cr}(p_i)$
-              \STATE $V_{Cr} \gets V_{Cr}(p_i)$
-            \ENDFOR \label{line:EndCross}
-            \RETURN $G_{Cr}(V_{CDT}\cup V_{Cr}, E_{CDT} \cup E_{Cr},B,T)$  
-          \end{algorithmic}
-        \end{scriptsize} 
-      \end{algorithm}
+      Fig.~\ref{fig:CGC} illustrates a routing preservation procedure. Given a layout plane $L$ with a set of placement blocks $B \in L$, where $B = \{b_i|1 \leq i \leq |B|\}$. As the layout without routing path shown in Fig.~\ref{fig:CGC}.(a), the set of corner points of blocks in $B$ are denoted by $V_C$ where $V_C = \{(x_i,y_i)|1 \leq i \leq 4|B|\}$. We define the vertex set of the layout extraction CDT to be $V_{CDT} = V_C \cup V_{RP}$, and the points locate on the periphery of routing plane (i.e. corners of the routing plane and the middle-points of each routing plane boundary) are denoted by $V_{RP}$. Regions that forbid CDT edge are called {\it holes} in CDT formulations. In our case, they are the areas inside blocks and we use set $H$ to represent these holes. The CDT graph $G_{CDT}$ generated from vertex set $V_{CDT}$ and hole set $H$ can be represented as $G_{CDT} = \{V_{CDT},E_{CDT},T,H\}$, where edge set $E_{CDT} = \{(v_i,v_j)|v_i,v_j\in V_{CDT}\}$ splits the plane into a set of non-overlapping triangles $T$ and rectangular holes $H$.
 
-      As shown in line~\ref{line:GCDT}, the CDT graph $G_{CDT}$ generated from vertex set $V_{CDT}$ and block set $B$ can be represented as $G_{CDT} = \{V_{CDT},E_{CDT},B,T\}$, where the edge set $E_{CDT} = \{(v_i,v_j)|v_i,v_j\in V_{CDT}\}$ splits the plane into a set of non-overlapping triangles $T$ and the rectangular blocks $B$. According to Fig.~\ref{fig:CGC}.(b), the layout with 2 blocks are transferred into a $G_{CDT}$ after triangulation, where $|B|$=2 (block A and B), $|V_{CDT}|=16$, $|E_{CDT}|=34$ and $|T|=18$.
+      Through the CDT, the geometric correlation between blocks is recorded by the CDT edges as well as routing channels. Fig.~\ref{fig:CGC} (a) is a layout diagram with two blocks and one routing path, and Fig.~\ref{fig:CGC}(b) shows the CDT graph generated by the layout, where $|V_{CDT}|=16$, $|H|=2$ (holes A and B), $|E_{CDT}|=34$ and $T=18$. 
 
+      The solid red lines denote CDT edges that are crossing with the routing path in Fig.~\ref{fig:CGC}(c). Through the triangulation, the routing plane is divided into a set of non-overlapping triangles with each edge representing a geometric relation between blocks. The path behavior can thus be recorded as an ordered set of CDT edges being crossed by that path.
 
-      After $G_{CDT}$ is established, one routing path is recovered back to demonstrate the routing preservation. As displayed in Fig.~\ref{fig:CGC}.(c), one $e_{CDT}$ intersects with the routing path is denoted by a crossing edge $e_{Cr}$ and the intersected point is denoted by a crossing point $v_{Cr}$. The detailed definition is as follows:
+      After $G_{CDT}$ is established, one routing path is recovered back to demonstrate the routing preservation. As displayed in Fig.~\ref{fig:CGC}(c), one $e_{CDT}$ intersects with the routing path is denoted by a crossing edge $e_{Cr}$ and the intersected point is denoted by a crossing point $v_{Cr}$. The detailed definition is as follows.
 
-       
       \begin{defi}\label{defi:CrossingPoint}
         Given a routing path $p$, and CDT edge set $E_{CDT}= \{e_{CDTi}| 1 \leq i\leq|E_{CDT}|\}$, if there exists a point $v(x,y)$ which is both on $p$ and $e_{CDTi}$, $e_{CDTi}$ is a crossing edge $e_{Cr}$ and $v(x,y)$ is a crossing point $v_{Cr}$.
       \end{defi}
 
-      From line~\ref{line:StartCross} to line~\ref{line:EndCross} in Algorithm~\ref{alg:CCG}, the procedure traverses the set crossing edges $E_{Cr}$ and crossing points $V_{Cr}$ is delivered. As Fig.~\ref{fig:CGC} displayed, an orange dotted line which originally denotes $e_{CDT}$ changes into solid red line as a crossing edge $e_{Cr}$, and the yellow point represents the intersection between the routing path, and such intersected point denotes a crossing point $v_{Cr}$. In addition, each $v \in V_{Cr}$ belongs to a routing path along with a crossing direction (horizontal/vertical, H/V), as illustrated in Fig.~\ref{fig:CGC}.(d). The directions are treated as {\it reference directions} which will be used later in the routing reconstruction stage, described in Section~\ref{sec:Proto}. 
+      \begin{figure}
+        \begin{center}
+        \includegraphics[width=0.7\textwidth]{Fig/Chapter4/CrG.eps}
+        \caption{Illustration of crossing graph generated from Fig.~\ref{fig:CGC}(d).
+          $V_{Cr}$ points store the path direction as reference direction in routing reconstruction stage, 
+          and $E_{Cr}$ edges are constructed to connect (1) adjacent points on the same CDT edge and (2) adjacent points on the same path.}
+        \label{fig:CrG}
+        \end{center}
+      \end{figure}
 
 
+      For multiple nets design, a single edge might be crossed with two or more routing paths. As illustrated in Fig.~\ref{fig:CGC}(d), the two routing paths, $p1$ and $p2$, both pass through space between block A and B with p2 closer to block A. In order to preserve the behavior of multiple nets routing, we define the {\it crossing graph} $G$ of layout $L$ as follows: 
 
-      For multiple nets design, a single edge might be crossed with two or more routing paths. As illustrated in Fig.~\ref{fig:CGC}(e), the two routing paths, $p_1$ and $p_2$, both pass through space between block A and B with $p_2$ closer to block A. In order to preserve the behavior of multiple nets routing, we define the {\it crossing graph} $G_{Cr}$ of layout $L$ as follows:
-      \vspace{0.2cm}
       \begin{defi}\label{defi:CrossGraph}
-        Let $G_{CDT}(V_{CDT},E_{CDT},B,T)$ denotes the CDT graph of $L$. $V_{Cr}$ denotes the set of crossing point and $E_{Cr}$ denotes the set of crossing edges. Then graph $G_{Cr} = \{V_{CDT} \cup V_{Cr},E_{CDT} \cup E_{Cr},B,T\}$ is a crossing graph of layout $L$. 
+        Let $G_{CDT}(V_{CDT},E_{CDT},H,T)$ denotes the CDT graph of $L$. $V_{Cr}$ denotes the set of crossing point and $E_{Cr}$ denotes the set of crossing edges. Then graph $G_{Cr} = \{V_{CDT} \cup V_{Cr},E_{CDT} \cup E_{Cr},H,T\}$ is a crossing graph of layout $L$. 
       \end{defi}
-      \vspace{0.2cm}
+
       In the end, the crossing graph stores not only the individual routing topology, but also the relative order of paths within each routing channel.
 
     \subsection{Hierarchical Layout Extraction and Preservation}\label{sec:HLE}
