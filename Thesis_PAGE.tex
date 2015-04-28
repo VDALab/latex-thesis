@@ -2,7 +2,7 @@
 
 \chapter{Parallel Hierarchical Synthesis}\label{chap:hsf} 
 
-  To elaborate the advantages of both deterministic optimization and circuit simulation, this work tends to integrated them as a hierarchical process. The framework inherit synthesis flow in \cite{PerfMap_ISQED2011} mostly. Here the updated flow replace the original performance exploration with PGA methodology. Also, the fine-tuning simulation is improve as probabilistic perturbation simulation. Therefore, our proposed flow is shown in Fig.~\ref{fig:PageFlow}, and the corresponding notations are list in Table~\ref{table:notation}.
+  To elaborate the advantages of both deterministic optimization and circuit simulation, this work tends to integrated them as a hierarchical process. The framework inherit synthesis flow in \cite{PerfMap_ISQED2011} mostly. Here the updated flow replace the original performance exploration with PGA methodology. Also, the fine-tuning simulation is improve as probabilistic perturbation simulation. Therefore, our proposed flow is shown in Figure~\ref{fig:PageFlow}, and the corresponding notations are list in Table~\ref{table:notation}.
 
   
 
@@ -20,7 +20,7 @@
       \label{fig:PageFlow}
     \end{figure}
 
-    Secondly, such matrix of device-level variables are further mapped into circuit-level variables by curve fitting. An vivid example for design variable mapping is shown in Fig.~\ref{fig:DeviceFit}. Given a set of device-level variables $V^D= \{{v^D}_i| 1 \leq i \leq |V^D|\}$ , each $v^D_i$ has the same step number $S_{V^D}$ in each range. That is, while $v_i^D$ has maximum value $V^D_{MAX}$ and minimum value $V^D_{min}$, there should be $S_{V^D}$ values among then. Therefore, a set of feasible device-level variables are constructed in a matrix $T_{|V^D|\times S_{V^D}}$, where $T_{|V^D| \times S_{V^D}} = \{ t_{i,j}| 1 \leq i \leq |V^D|, 1 \leq j \leq S_{V^D} \}$. Meanwhile, a set of circuit-level variables $V^C = \{{v^C}_j| 1 \leq j \leq |V^C|\}$ should be extracted for performance exploration. As Eq.(\ref{eq:devToCir}),all training pairs of the extracted circuit-level variables from previous transformation and device-level variables are then formulated as least-square error problem in analytical posynomial form design equations to acquire fitting parameters.
+    Secondly, such matrix of device-level variables are further mapped into circuit-level variables by curve fitting. An vivid example for design variable mapping is shown in Figure~\ref{fig:DeviceFit}. Given a set of device-level variables $V^D= \{{v^D}_i| 1 \leq i \leq |V^D|\}$ , each $v^D_i$ has the same step number $S_{V^D}$ in each range. That is, while $v_i^D$ has maximum value $V^D_{MAX}$ and minimum value $V^D_{min}$, there should be $S_{V^D}$ values among then. Therefore, a set of feasible device-level variables are constructed in a matrix $T_{|V^D|\times S_{V^D}}$, where $T_{|V^D| \times S_{V^D}} = \{ t_{i,j}| 1 \leq i \leq |V^D|, 1 \leq j \leq S_{V^D} \}$. Meanwhile, a set of circuit-level variables $V^C = \{{v^C}_j| 1 \leq j \leq |V^C|\}$ should be extracted for performance exploration. As Eq.(\ref{eq:devToCir}),all training pairs of the extracted circuit-level variables from previous transformation and device-level variables are then formulated as least-square error problem in analytical posynomial form design equations to acquire fitting parameters.
 
     {\footnotesize
     \begin{align}\label{eq:devToCir}
@@ -114,7 +114,7 @@
       \end{array}
     \end{align}
 
-    Also, as shown in Fig.~\ref{fig:Retarg}, multiple solutions as distributions are generated from {\it Performance Space Exploration} in Section~\ref{sec:pga}, and it stands for a set of potential parameters for devices in required circuit. However, $\Psi$ not only narrows down the solution space for circuit simulation, but provides good prediction for optimal performance which will be validated via probabilistic simulation in Section~\ref{sec:pss} efficiently. 
+    Also, as shown in Figure~\ref{fig:Retarg}, multiple solutions as distributions are generated from {\it Performance Space Exploration} in Section~\ref{sec:pga}, and it stands for a set of potential parameters for devices in required circuit. However, $\Psi$ not only narrows down the solution space for circuit simulation, but provides good prediction for optimal performance which will be validated via probabilistic simulation in Section~\ref{sec:pss} efficiently. 
 
   \input{Thesis_ProbSimu.tex}
 
