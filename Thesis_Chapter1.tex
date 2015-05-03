@@ -79,7 +79,19 @@
       Additionally, Pan et al. in \cite{Pan_CGR_ICCAD2012} claim that routing priority considering constraint group in hierarchy can enhance the signal integrity. Still, work in LAYGEN II \cite{LAYGENII_TCAD13} performs an evolutionary multi-objective way to evaluate an optimized routing results from layout templates. Lately, \cite{SAPR_DAC13} proposes a simultaneous analog placement and routing framework which further considers the current flow constraints for critical nets. Overall, although the symmetry and matching constraints are well treated and routing matching constraints are extended further, the correlation among wires and placement has not been systematically preserved as a guideline to migrate.
 
   \section{Our Contributions}\label{sec:contribution}
-    \subsection{Parallel genetic performance exploration for multi-objective analog circuit synthesis}
+
+    To elaborate the design knowledge while developing analog circuit, it is feasible to extract current design patterns from design structure to layout behavior as guidelines into targeting results. In this dissertation, we present a comprehensive design migration framework for analog circuit generation. As Figure~\ref{fig:OverallFlow} illustrated, the existing design is divided into netlist and layout. First of all, we apply the {\it Parallel Genetic Performance Exploration} to traverse the limitation of the targeting technology for required netlist and then the explored netlist is generated. Later the connectivity of such explored netlist, the targeting technology information and the design guidelines from netlist are integrated as a constraint group for routing via {\it Configurable Constraint Group Generation}. In the end, we extract the existing layout with placement and routing and migrate the layouts as prototypes by means of {\it Rapid Migration Framework via Layout Prototyping}. The detail contributions of each step are list as following sections,
+
+    \begin{figure}[ht]
+        \centerline{
+        \includegraphics[width=0.6\textwidth]{Fig/Introduction/OverallFlow.eps}}
+        \caption{The overall flow of analog design migration from existing design with netlist and layout.} 
+        \label{fig:OverallFlow}
+      \end{figure}
+
+    
+
+    \subsection{Parallel genetic performance exploration for multi-objective analog circuit synthesis}\label{subsec:PAGEContribute}
 
       \begin{figure}[ht]
         \centerline{
@@ -97,6 +109,7 @@
       \end{itemize}
 
     \subsection{Configurable constraint-driven analog routing}
+    \label{subsec:CCDARContribute}
 
       In Chapter~\ref{chap:CUCLM}, we present a hierarchical constraint driven routing methodology. This methodology determines the analog routing order by the hierarchical constraint groups. Such constraints preserve both the objective physical technology constraints and the subjective  analog design-oriented constraints. Other than adopting the self-defined constraints for routing, we provide an innovative uniform constraint group for routing. Such constraint group is based on uniform OpenAccess constraint group model and contains both foundry level process rules and analog design-knowledge constraints. By maintaining the universal industrial constraint format, it is feasible for different placement-and-routing engines to co-design by accessing the same constraint group for consistency. We first present a constraint group generation for analog layout design with a selected technology. We then practice the hierarchical constraint-aware routing decision flow in a divide-and-conquer approach. The overall framework is illustrated in Figure~\ref{fig:LayoutFlow}. 
     
@@ -116,6 +129,7 @@
       \end{itemize}
 
     \subsection{Rapid migration framework via prototyping and wire segment refinement}
+    \label{subsec:DMRContribute}
 
       While the aforementioned mechanisms in section~\ref{subsec:DMOverview} successfully facilitate layout migration with designers' know-how on placement, the behavior of routing has not been extracted essentially. Thus, the template-based layout migration does not benefit routing much. In addition, the routing generation relies on automatic routing methodologies with respect to the placement constraints. Such constraints in ~\cite{cbc-bhattacharya-dac04,Bhattacharya_ASPDAC04,msc-bhattacharya-tcad06,Zhang_TCAD08,Wang_ALRGP_TODAES2011} are not suitable for routing generation. 
 
