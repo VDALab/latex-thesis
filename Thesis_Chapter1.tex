@@ -80,14 +80,16 @@
 
   \section{Our Contributions}\label{sec:contribution}
 
+    \begin{figure}[ht]
+      \centerline{
+      \includegraphics[width=0.6\textwidth]{Fig/Introduction/OverallFlow.eps}}
+      \caption{The overall flow of analog design migration from existing design with netlist and layout.} 
+      \label{fig:OverallFlow}
+    \end{figure}
+
     To elaborate the design knowledge while developing analog circuit, it is feasible to extract current design patterns from design structure to layout behavior as guidelines into targeting results. In this dissertation, we present a comprehensive design migration framework for analog circuit generation. As Figure~\ref{fig:OverallFlow} illustrated, the existing design is divided into netlist and layout. First of all, we apply the {\it Parallel Genetic Performance Exploration} to traverse the limitation of the targeting technology for required netlist and then the explored netlist is generated. Later the connectivity of such explored netlist, the targeting technology information and the design guidelines from netlist are integrated as a constraint group for routing via {\it Configurable Constraint Group Generation}. In the end, we extract the existing layout with placement and routing and migrate the layouts as prototypes by means of {\it Rapid Migration Framework via Layout Prototyping}. The detail contributions of each step are list as following sections,
 
-    \begin{figure}[ht]
-        \centerline{
-        \includegraphics[width=0.6\textwidth]{Fig/Introduction/OverallFlow.eps}}
-        \caption{The overall flow of analog design migration from existing design with netlist and layout.} 
-        \label{fig:OverallFlow}
-      \end{figure}
+   
 
     
 
