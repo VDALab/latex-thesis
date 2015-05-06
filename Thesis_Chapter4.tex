@@ -59,7 +59,7 @@
       The major flow of placement constraints extraction \cite{ALP_YPWeng_iccad2011} is reviewed as follows:
       \subsubsection{Building Block Recognition}
         In order to reduce mismatch while generating layout, the principles of symmetrical and matching constraints should be considered as building blocks. 
-        Besides, Building blocks under the same matching constraints are identified by the existing netlist. Via pattern matching technique \cite{Massier_TCAD08} the preferable matching building blocks are generated.
+        Besides, Building blocks under the same matching constraints are identified by the existing netlist. Via pattern matching technique \cite{srm-massier-tcad08} the preferable matching building blocks are generated.
 
       \subsubsection{Topological Slicing Tree Generation}
         Later, these fundamental build blocks construct the topological slicing tree. In general, the placement can be decomposed by horizontal and vertical cuts. However, since some of the devices are recognized as build blocks, the traditional slicing tree tends to occur mismatches. Instead, cells under the same building block are placed together as a super-module in representation. After vertical and horizontal  partitioning, a topological slicing tree (S) with n symmetry groups, m matching groups which outside any symmetry group, and l non-symmetry cells in layout are generated at the same hierarchy. Other than \cite{ALP_YPWeng_iccad2011} which flattens the layout into the unit hierarchy for slicing tree generation, we preserved the hierarchy of the layout with respect to the hierarchical structure from the existing netlist. Such hierarchy is essential for multi-level layout reconstruction. 
