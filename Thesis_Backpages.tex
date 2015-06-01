@@ -1,0 +1,31 @@
+% !TEX root = Thesis.tex
+% this file is encoded in utf-8
+% v2.0 (Apr. 5, 2009)
+
+
+%%%
+\newpage
+%\phantomsection % for hyperref to register this
+%\addcontentsline{toc}{chapter}{\nameRef}
+%\renewcommand{\bibname}{\protect\makebox[5cm][s]{\nameRef}}
+%%  \makebox{} is fragile; need protect
+\bibliographystyle{ieeetr}  % 使用 IEEE Trans 期刊格式
+\bibliography{IEEEabrv,Thesis_reference}
+%,reference_PAGE,reference_HCDR}
+
+
+%%%
+\newpage
+\chapter*{\protect\makebox[\textwidth][c]{\nameVita}} % \makebox{} is fragile; need protect
+
+\phantomsection % for hyperref to register this
+\addcontentsline{toc}{chapter}{\nameVita}
+\input{Thesis_AutoBio.tex}
+
+%%%
+\newpage
+\chapter*{\protect\makebox[\textwidth][l]{\nameAppendix}} % \makebox{} is fragile; need protect
+
+\phantomsection % for hyperref to register this
+\addcontentsline{toc}{chapter}{\nameAppendix}
+\input{Thesis_appendix.tex}
