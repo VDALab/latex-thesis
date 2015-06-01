@@ -1,0 +1,137 @@
+%!TEX program = xelatex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[12pt, a4paper, fullpage]{yzu_report}
+%\documentclass[12pt, a4paper, fullpage]{uiucthesis}
+\documentclass[12pt, a4paper, fullpage]{mythesis}
+
+%\usepackage{definition}
+\usepackage{hyperref}
+\usepackage[numbered]{bookmark}
+
+
+
+\usepackage{cite}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{listings}
+\usepackage{amsthm} 
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{defi}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+%\newtheorem{proposition}{Proposition}
+
+%\usepackage{ctex}
+\usepackage{xmpmulti}
+\usepackage{psfrag}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{footnote}
+\usepackage{bm}
+\usepackage{cases}
+\usepackage{algorithm,algcompatible}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{rotating}
+
+
+\usepackage{color}
+\usepackage{rotating}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{indentfirst}
+\usepackage{makecell}
+\usepackage{leftidx}
+\usepackage{slashbox}
+%\usepackage{subfigure}
+\usepackage{fancyhdr}
+% 如果不需要任何浮水印，則請把下列介於 >>> 與 <<< 之間
+% 的文字行關掉 (行首加上百分號)
+%% 浮水印 >>> 
+\input{Thesis_WaterMark.tex}
+%% <<< 浮水印
+
+
+\pagenumbering{arabic}
+
+\usepackage{geometry}  % for easy margin settings
+% margins setting
+%\geometry{verbose,a4paper,tmargin=2.5cm,bmargin=3.5cm,lmargin=2.5cm,rmargin=2cm}
+
+
+
+\geometry{verbose,a4paper,tmargin=2.5cm,bmargin=3.5cm,lmargin=2.5cm,rmargin=2.5cm}
+
+\makesavenoteenv{tabular}
+\renewcommand{\labelenumi}{\alph{enumi})}
+%\theoremstyle{remark}
+\newtheoremstyle{mythmsty}{3pt}{3pt}{}{}{\bf}{.}{.5em}{}
+\theoremstyle{mythmsty}
+\newtheorem{proposition}{Proposition}[chapter]
+%% ENVIRONEMTS
+\def\QED{\mbox{\rule[0pt]{1.5ex}{1.5ex}}}
+\def\myproof{\noindent\hspace{2em}{\it Proof: }}
+\def\endmyproof{\hspace*{\fill}~\QED\par\endtrivlist\unskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{type1cm}
+\usepackage{fontspec}			        %加這個就可以設定字體
+\usepackage{xeCJK} 			            %讓中英文字體分開設置
+\XeTeXlinebreaklocale "zh"           	%這兩行一定要加，中文才能自動換行
+\XeTeXlinebreakskip = 0pt plus 1pt   	%這兩行一定要加，中文才能自動換行
+			                        				%加了這幾行後，就可以隨意的打中文，接下來的跟一般的LaTeX都一樣
+			                        				%注意！！！一定要存成UTF-8編碼的文件。
+
+%\setCJKmainfont[AutoFakeBold=6,AutoFakeSlant=.4]{標楷體}
+								%設定中文為系統上的字型，而英文不去更動，使用原TeX字型
+               	%AutoFakeBold設定粗體字要多粗
+                %AutoFakeSlant設定斜體字要多斜，範圍-0.999到0.999，負值為往左斜
+%\defaultCJKfontfeatures{AutoFakeBold=6,AutoFakeSlant=.4} %以後不用再設定粗斜
+\setCJKmainfont[AutoFakeBold=6,AutoFakeSlant=.4]{[BiauKai.ttf]}
+\defaultCJKfontfeatures{AutoFakeBold=6,AutoFakeSlant=.4}
+\newCJKfontfamily\Kai{[BiauKai.ttf]}       	%定義指令\Kai則切換成標楷體
+%\newCJKfontfamily\Hei{微軟正黑體}   	%定義指令\Hei則切換成正黑體
+%\newCJKfontfamily\NewMing{新細明體} 	%定義指令\NewMing則切換成新細明體
+
+\setlength{\headheight}{15pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%\title{Parallel Turbo Decoder Design and Implementation}  
+%\author{Cheng-Chi Wong}
+%\phdthesis
+%\department{Department of Electronics Engineering \& Institute of Electronics}
+%\college{Electrical \& Computer Engineering} 
+%\advisor{Hsie-Chia Chang}
+%\degreeyear{2010}
+
+%\maketitle
+
+\frontmatter
+
+\input{Thesis_Definitions.tex}
+
+\input{Thesis_Frontpages.tex}
+
+\mainmatter
+\input{Thesis_Introduction}
+\input{Thesis_Methodology}
+\input{Thesis_Conclusion}
+
+
+
+
+\backmatter
+\input{Thesis_Backpages.tex}
+
+
+\end{document}

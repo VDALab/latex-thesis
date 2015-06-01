@@ -1,0 +1,12 @@
+*.aux
+*.bbl
+*.toc
+*.log
+*.lof
+*.fdb_latexmk
+*.synctex.gz
+*.blg
+*.lot
+*.synctex.gz(busy)
+Thesis.pdf
+BiauKai.ttf
