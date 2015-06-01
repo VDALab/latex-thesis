@@ -15,31 +15,64 @@
       \label{fig:Flow}
     \end{figure}
 
-    \begin{table}
-      \begin{center}
-      \caption{Comparison on Analog Layout Migration Approaches}\label{table:MigrateComp}
-      \scriptsize
-      \begin{tabular}{|c|c|c|c|c|}
-        \hline
-        & \cite{msc-bhattacharya-tcad06} & \cite{ALP_YPWeng_iccad2011} & \cite{Chin_DMR_ICCAD2013} & Our Approach \\
-        \hline
-        Layout Constraints & Preserved & Preserved & Preserved & Preserved \\
-        \hline
-        Placement topology  & Keep origin & Multi-prototypes & Already given & Multi-prototypes \\
-        \hline  
-        Routing behavior  & Partially preserved &  Manually completed &  Preserved routing & Preserved routing \\
-        \hline
-        \#Migrated Layout &  1 &  Multi-Solutions & Multi-Solutions & Wires refined Multi-Solutions \\
-        \hline
-        Sign-off Time &   slow &  slow &  fast &  fast \\
-        \hline
-      \end{tabular}
-      \end{center}
-    \end{table}
+    \subsection{Comparison among Analog Layout Migration Approaches}\label{subsec:MigrateComp}
 
-    In comparison with current migration mechanisms, Table~\ref{table:MigrateComp} shows the different criterion to examine the disparity. There are 3 current migration styles, \cite{msc-bhattacharya-tcad06}, \cite{ALP_YPWeng_iccad2011} and \cite{Chin_DMR_ICCAD2013}, mentioned in Table~\ref{table:MigrateComp}. For analog layout constraints, each approach is able to preserve specific constraints such as symmetry constraints and matching constraints. For placement topology, \cite{msc-bhattacharya-tcad06} aims to keep the exactly same topology as the existing layout, \cite{ALP_YPWeng_iccad2011} successfully produces multiple placement candidates and the placement in \cite{Chin_DMR_ICCAD2013} is already given. For routing behavior, \cite{msc-bhattacharya-tcad06} only preserves the wires that belong to the symmetric devices or clusters which are symmetric on the original layout, \cite{ALP_YPWeng_iccad2011} manually completes the routing section and \cite{Chin_DMR_ICCAD2013} quickly produces routing prototype with routing preservation. 
 
-    Therefore, \cite{msc-bhattacharya-tcad06} generates single layout each time and \cite{ALP_YPWeng_iccad2011} can generate multiple layout solutions. \cite{Chin_DMR_ICCAD2013} produces multiple solutions from multiple placement results. To consider the Time-to-sign-off for overall flow, \cite{msc-bhattacharya-tcad06} and \cite{ALP_YPWeng_iccad2011} are slower due to the routing generation and \cite{Chin_DMR_ICCAD2013} facilitates the routing generation. In comparison, our approach consolidates the advantages from \cite{ALP_YPWeng_iccad2011} for more opportunity and \cite{Chin_DMR_ICCAD2013} for fast prototyping. Additionally, our approach refines the wires for better performance. In other words, we firstly generate multiple placement candidates and utilize them with preserved routing behaviors to fast generate multiple layout results. 
+      \begin{table}
+        \begin{center}
+        \caption{Comparison on Analog Layout Migration Approaches}\label{table:MigrateComp}
+        \scriptsize
+        \begin{tabular}{|c|c|c|c|c|}
+          \hline
+          & \cite{msc-bhattacharya-tcad06} & \cite{ALP_YPWeng_iccad2011} & \cite{Chin_DMR_ICCAD2013} & Our Approach \\
+          \hline
+          Layout Constraints & Preserved & Preserved & Preserved & Preserved \\
+          \hline
+          Placement topology  & Keep origin & Multi-prototypes & Already given & Multi-prototypes \\
+          \hline  
+          Routing behavior  & Partially preserved &  Manually completed &  Preserved routing & Preserved routing \\
+          \hline
+          \#Migrated Layout &  1 &  Multi-Solutions & Multi-Solutions & Wires refined Multi-Solutions \\
+          \hline
+          Sign-off Time &   slow &  slow &  fast &  fast \\
+          \hline
+        \end{tabular}
+        \end{center}
+      \end{table}
+
+      In comparison with current migration mechanisms, Table~\ref{table:MigrateComp} shows the different criterion to examine the disparity. There are 3 current migration styles, \cite{msc-bhattacharya-tcad06}, \cite{ALP_YPWeng_iccad2011} and \cite{Chin_DMR_ICCAD2013}, mentioned in Table~\ref{table:MigrateComp}. For analog layout constraints, each approach is able to preserve specific constraints such as symmetry constraints and matching constraints. For placement topology, \cite{msc-bhattacharya-tcad06} aims to keep the exactly same topology as the existing layout, \cite{ALP_YPWeng_iccad2011} successfully produces multiple placement candidates and the placement in \cite{Chin_DMR_ICCAD2013} is already given. For routing behavior, \cite{msc-bhattacharya-tcad06} only preserves the wires that belong to the symmetric devices or clusters which are symmetric on the original layout, \cite{ALP_YPWeng_iccad2011} manually completes the routing section and \cite{Chin_DMR_ICCAD2013} quickly produces routing prototype with routing preservation. 
+
+      Therefore, \cite{msc-bhattacharya-tcad06} generates single layout each time and \cite{ALP_YPWeng_iccad2011} can generate multiple layout solutions. \cite{Chin_DMR_ICCAD2013} produces multiple solutions from multiple placement results. To consider the Time-to-sign-off for overall flow, \cite{msc-bhattacharya-tcad06} and \cite{ALP_YPWeng_iccad2011} are slower due to the routing generation and \cite{Chin_DMR_ICCAD2013} facilitates the routing generation. In comparison, our approach consolidates the advantages from \cite{ALP_YPWeng_iccad2011} for more opportunity and \cite{Chin_DMR_ICCAD2013} for fast prototyping. Additionally, our approach refines the wires for better performance. In other words, we firstly generate multiple placement candidates and utilize them with preserved routing behaviors to fast generate multiple layout results. 
+
+    \subsection{Routing Preservation with Planar Triangulation}\label{subsec:RtPres}
+      To facilitate the routing preservation in the existing layout, the relationship between routing wires and placement blocks is crucial. The triangulation of layout plane is used to take down the correlation. Fig.~\ref{fig:WhyCDT} depicts that the updated triangular edges can retain the routing behavior among blocks after shrinking and stretching. Therefore, planar triangulation is applied to our analog layout migration mechanism.
+
+      \begin{figure}[ht]
+        \begin{center}
+          \includegraphics[width=0.7\textwidth]{Fig/WhyCDT.eps}
+          \caption{Illustration of triangulation to take down the correlation between placement and routing. (a). The existing layout with triangles at routing channel. (b) The migrated layout with updated triangular edges and recovering routing paths.}
+          \label{fig:WhyCDT}
+        \end{center}
+      \end{figure}
+
+    \subsection{Review of PSLG and CDT}\label{subsec:ReviewCDT}
+      In order to describe the analog layout design as a planar straight-line graph (PSLG), we briefly define PSLG as follows:
+
+      \begin{defi}\label{defi:PSLG}
+        A PSLG is a graph $G(V,E)$, which can be embedded in the plane without any crossing. Every edge $E$ in $G$ is a straight segment, where $V$ implies all the vertices in $G$ and $E$ implies all the edges connected to $V$. 
+      \end{defi}
+
+      By definition~\ref{defi:PSLG}, we can use PSLG to describe the placement of the analog layout with several rectangles and polygons. Furthermore, polygons decomposition is facilitated by decomposing into simpler components such as triangles. The triangulation can be generalized to a PSLG, where the entire plane is decomposed into triangles. The triangulation is defined in the following definition.
+
+      \begin{defi}\label{defi:Triangulation}
+        Triangulation is a process to produce an updated PSLG $G'(V'E')$ out of a given PSLG $G(V,E)$, such that each edge $e' \in E'$ is exactly a triangular edge.
+      \end{defi}
+
+      The complexity of triangulation is $O(n\log n)$, which is well explained in \cite{CDT}. We further look for a quality triangulation instead of triangles with arbitrary shapes. Therefore, the Delaunay Triangulation generates a set of points satisfying the empty circumcircle property, which maximizes the minimum angles. Therefore, CDT can minimize the number of triangles with small angles among placement blocks in the layout. In other words, CDT reduces the total number of triangular angles the routing wires should intersect. Additionally, in a practical analog layout problem, not all polygons and rectangles are supposed to be decomposed into triangles, such as obstacles and devices. The generalized Delaunay triangulation, which is also called constrained Delaunay triangulation (CDT), fit better for our requirement. 
+
+      According to above definitions, it is possible to decompose the analog layout with obstacles and routing channels into convex holes and triangles, where the quality triangles are capable of preserving the across wires. 
+
+
 
   \section{layout Preservation}\label{sec:LayoutPreserv}
 
@@ -221,7 +254,7 @@
     Since all the above steps are implemented automatically, each net still needs to be patched in detail. For instance, the pin connections inside the devices are done manually since the location inside each devices are changed from the source layout to the target technology. 
     However, since we perform detailed routing legalization scheme in a comprehensive view, most of the tasks are covered and the detail refinement is easier to implement for analog layout designers.
   
-  Note that the routing behaviors are generally preserved in the targeting layout due to the similarity among the original placement and the targeting placement. Thus, the preservation of routing is flexible. The fundamental idea of routing preservation in this paper is to preserve the corresponding wires with the placement topology. If the designers decide to select a different placement topology, the necessity of preservation for routing is less. Hence, that is what our triangulation-based preservation provides.
+    Note that the routing behaviors are generally preserved in the targeting layout due to the similarity among the original placement and the targeting placement. Thus, the preservation of routing is flexible. The fundamental idea of routing preservation in this paper is to preserve the corresponding wires with the placement topology. If the designers decide to select a different placement topology, the necessity of preservation for routing is less. Hence, that is what our triangulation-based preservation provides.
 
 
   \section{Wire Segment Refinement}\label{sec:WSR}
@@ -631,7 +664,7 @@
             \hline
             Routing completeness & - & - & 78.8\% & 73.7\% & 83.9\% & 77.17\% \\
             \hline
-            Area(${\mu m}^2$) & - &  23912 ($196\times 122$) & 17136$153\times 112$ & 14606 ($134\times109$) &14415($155\times 93$)& 11868 ($129\times 92$) \\
+            Area(${\mu m}^2$) & - &  23912 ($196\times 122$) & 17136($153\times 112$) & 14606 ($134\times109$) &14415($155\times 93$)& 11868 ($129\times 92$) \\
             \hline
           \end{tabular}
         \end{center}
@@ -672,7 +705,7 @@
       In Table~\ref{table:HierProto}, row 3-14 show the feasibility on our approach for each technology with the simulation results, and all the testing circuit satisfy the performance specification. For umc90nm technology, our approach earns better performance on quiescent current, minimum $R_{on}$, $V_{out}$ settling time, temperature, power efficiency, $V_{drop-out}$, $\Delta V_{out-transient}$ and phase margin than \cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}. At the same time, for umc65nm technology, our approach earns better performance on dropout voltage, quiescent current, $Minimum R_{on}$, $V_{out}$ settling time, $\Delta V_{out-transient}$, open loop gain and phase margin. We can observe that even the other parts of simulation data are not notable. For the purpose to generate layout prototypes efficiently, a migrated layout with flexible placement topology dominate most of the performance metrics. Our approach framework accomplishes qualified layout results with higher productivity.
 
     
-      For the reusability of the framework, we have collected further statistics in routing issues. As revealed in row 15-17 at Table~\ref{table:HierProto}, the overall WL, auto-gen WL and routing completeness represent the routing behavior among 5 layout results. In the original layout on tsmc90nm. The routing is accomplished manually with wirelength 2426.73$\mu m$, and the wirelength for the other two technologies with the same placement topology (\cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}) are 2122.814$\mu m$ and 1590.84$\mu m$. Meanwhile, our approach on umc90nm and umc65nm result in 1579.09$\mu m$ and 1308$\mu m$, respectively. We can observe that our approach takes more routing wirelength, but also earns more routing completeness with 78.8\% and 83.9\% on umc90nm and umc65nm. We can tell that the lost routing completeness rate is mostly made from the lost of triangles during {\it Crossing Graph Updating} in Section~\ref{sec:updateG}. The loss of triangles indicates the destruction of planar relationship. The more triangles miss, the more wires need to be reconnected. Even though our approach obtains worse routing completeness than \cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}, the performance is averagely better and the area is obviously compact than \cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}.
+      For the reusability of the framework, we have collected further statistics in routing issues. As revealed in row 15-17 at Table~\ref{table:HierProto}, the overall WL, auto-gen WL and routing completeness represent the routing behavior among 5 layout results. In the original layout on tsmc90nm. The routing is accomplished manually with wirelength 2426.73$\mu m$, and the wirelength for the other two technologies with the same placement topology (\cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}) are 2122.814$\mu m$ and 1590.84$\mu m$. Meanwhile, our approach on umc90nm and umc65nm result in 1579.09$\mu m$ and 1308$\mu m$, respectively. We can observe that our approach takes more routing wirelength, but also earns more routing completeness with 78.8\% and 83.9\% on umc90nm and umc65nm. We can tell that the lost routing completeness rate is mostly made from the lost of triangles during {\it Crossing Graph Updating} in Section~\ref{sec:updateG}. The loss of triangles indicates the destruction of planar relationship. The more triangles miss, the more wires need to be reconnected. Since the major constraint in this case is the area, part of the original layout constraints are released. Such as the symmetry group has been released. However, it benefits the area. Even though our approach obtains worse routing completeness than \cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}, the performance is averagely better and the area is obviously compact than \cite{msc-bhattacharya-tcad06}+\cite{Chin_DMR_ICCAD2013}.
 
     In brief, the experimental results show that our approach with multiple placement topologies enlarges the solution space, CDT-based-migrated routing raises the routing reusability out of preservation and wire segment refinement explores the better performance. Meanwhile, the compelling speed-up of design time indicates the productivity for analog design.
 

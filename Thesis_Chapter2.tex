@@ -2,7 +2,9 @@
 
 \chapter{Parallel circuit performance exploration for circuit sizing via genetic algorithm}\label{chap:PAGE}
   \section{Introduction}\label{sec:PAGEIntro}
-    To simplify the analog sizing problem, in this chapter, we treat the analog circuit performance exploration problem as a searching process. According to the complexity for searching multi-objective problem, a framework which integrates global and local search is considered. Moreover, we also investigate that evolutionary algorithm such as genetic algorithm is workable for exploration in high-dimensional performance space. Background knowledges for hierarchical framework and genetic algorithm are as follows.
+    To simplify the analog design migration, we first try to figure out the optimized circuit sizing in the targeting technology node. In this chapter, we treat the analog circuit performance exploration problem as a searching process. According to the complexity for searching multi-objective problem, a framework which integrates global and local search is considered. Moreover, we also investigate that evolutionary algorithm such as genetic algorithm is workable for exploration in high-dimensional performance space. Background knowledges for hierarchical framework and genetic algorithm are as follows.
+    
+
     \subsection{Problem Description} 
       State-of-the-art acknowledges a collection of Pareto-fronts which sketch the performance space, later an optimal point is selected for local search problem, which did not mention that how to define optimal point among the space. Instead of collecting the performance space information, this paper aggressively define performance limit as exploration main objective:
 
@@ -18,7 +20,7 @@
 
 
       \begin{defi}
-        {\bf Stochastic simulation for local search:} A set of feasible performance is re-targeted to corresponding design variables. The local search practices a stochastic SPICE simulation w.r.t. these selected design variables. 
+        {\bf Stochastic simulation for local search:} A set of feasible performance is re-targeted to corresponding design variables. The local search practices a stochastic SPICE simulation w.r.t. these selected design variables. According to \cite{PerfMap_ISQED2011}, although the explored performance metric represents the optimal in performance space, any high-level or non-ideal effect is not overlooked in the exploration process. Therefore, by employing global optimization such as ProSA, the entire circuit is re-examined into circuit simulator with real models and parameters from the advanced technology node. The explored population of performance metrics are the initial distributions, which is a converged space for ProSA to swift.
       \end{defi}
     \subsection{Hierarchical Circuit Performance Exploration Methodology\cite{PerfMap_ISQED2011}}
       To cope with complicated analog sizing problem, a process to find solutions for multiple performance targets can be divided into bi-direction search stages. Generally, in the design flow of analog IC, which begins from performance level, through circuit (netlist) level and then implements in device level. In performance level, designers specify the circuit behavior as performance, such as voltage gain, frequency bandwidth and output power. later, the circuit level parameters and describe the netlist topology. Meanwhile, the device level shows the device information which connects to physical layout. 
