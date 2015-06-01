@@ -1,0 +1,126 @@
+%!TEX root = Thesis.tex
+
+\chapter{Methodology and Table}\label{chap:Method}
+      
+        
+  \begin{defi}
+    {\bf way of def}: text here
+  \end{defi}
+
+  Example of equation in ~\ref{eq:devToCir}
+
+  \begin{align}\label{eq:devToCir}
+    \begin{array}[t]{rl}
+      Variables: & \begin{array}[t]{rl}
+                    T_{|V^D| \times S_{V^D}}  & = \{t_{i,j}| 1 \leq i \leq |V^D|,\; 1 \leq j \leq S_{V^D}\}   \\
+                    V^C   &= \{v_j^C, 1\leq j \leq |V^C| \}   \\
+                    v_j^C &= \{f_j^{(C_f)}(T_{|V^D| \times S_{V^D}})|1 \leq j \leq |V^C|\}  \\
+                  \end{array} \\
+       minimize & \| \sum{ v_j^C - f_j^{(C_f)}(T_{|V^D| \times S_{V^D}})}\|^2   \\
+     subject\; to & C_f\in \left [{C_f}_{min}, {C_f}_{MAX} \right] 
+    \end{array} 
+  \end{align}
+
+
+  \section{Experimental with Tables}\label{sec:PAGEExp}
+    
+    \newsavebox{\tablebox}
+    \begin{table}[ht]
+      \begin{center}
+      {\small
+        \caption{Device statistics of RFDA and OpAmp}\label{table:stat}
+        \begin{lrbox}{\tablebox}
+          \centering{
+            \begin{tabular}{|c|c|c|c|c|c|}
+              \hline
+              &  \multicolumn{5}{c|}{Device Number} \\
+              \cline{2-6}
+              circuits &  MOS &   Capacitor & Resistor  &  Inductor & Total   \\
+              \hline
+              RFDA     &  12   &   30       &     0     &     30     &   72     \\
+              \hline  
+              Spec     &  $A_v(\frac{v}{v})$    & $P_{dc} (\mu W)$  & $P_{out}(mW)$  & $F_{cent}(GHz)$ & $BW(GHz)$   \\ 
+              \cline{2-6}  
+                       &  $ \geq5$ & $\leq 0.5$ & $\geq 2$& $\geq 5$ & $\geq 10$ \\
+              \hline  
+              Opamp   &  18   &    1       &     0     &      0     &   19     \\
+              \hline  
+              Spec     &  $A_v(\frac{v}{v})$    & $P_{dc} (\mu W)$  & $P_{out}(\mu W)$ & $BW(MHz)$   & Phase Margin  \\
+              \cline{2-6}  
+               &  $ \geq40$ & $\leq 100$ & $\geq 0.1 $& $\geq 60$ & $\geq 50$ \\
+              \hline
+            \end{tabular}
+          }
+          \end{lrbox}
+        \scalebox{0.8}{\usebox{\tablebox}}
+        }
+      \end{center}
+    \end{table}
+
+    \definecolor{mygray}{gray}{.9}
+    \begin{sidewaystable}
+      \begin{center}
+      \caption{The mapping results from circuit-level variables to performance metrics and the runtime from circuit-level to performance metrics for \cite{PerfMap_ISQED2011} and 3 genetic exploration styles.}    
+      \label{table:PopulationResult}
+      \begin{lrbox}{\tablebox}
+        \centering{
+        \begin{small}
+        \begin{tabular}{|l|l|c|c|c|c|c|c|c|}
+            \hline
+            \rowcolor{mygray}
+            RFDA        & Algorithm &Runtime(s) & Rumtime Improv.&    $A_v(\frac{v}{v})$    & $P_{dc} (\mu W)$  & $P_{out}(mW)$  & $F_{cent}(GHz)$           & $BW(GHz)$   \\ 
+            \hline
+            \cline{2-9}
+                    & {\bf ITE}\cite{PerfMap_ISQED2011} &  38880 & - & 1.5- 8 & $\leq 0.85$ & $\leq 21.7$ &  $2.6802 \sim 27.299$     & $ 2.3485 \sim 51.587$ \\
+            \cline{2-9}
+                    & $\text G\text A_{64}$  & 4122  & 9.43x& 4 \~ 5.2143 & 0.368 - 0.997 & 20.9 - 21.2 &   11.0 - 13.56   & 18.92 - 24.10 \\
+            \cline{2-9}
+             umc65nm    & $\text P\text G\text A_{64}$  & 3416 & 11.38x&  4 - 5.2143 & 0.354 - 0.990  &  20.9 - 21.2 & 11.04 - 13.56& 19.07 - 24.10 \\
+             \cline{2-9}
+                    & $\text P\text G\text A_{256}$  & 8053 & 4.82x  & 4 - 5.2298 & 0.002 - 1.019 & 20.9 - 27.8 &  11.12 - 13.52   & 19.23 - 23.94 \\
+            \hline
+            \rowcolor{mygray}
+            Opamp        & Algorithm &Runtime(s) & Runtime Improv. &   $A_v(\frac{v}{v})$    & $P_{dc} (\mu W)$  & $P_{out}(mW)$  & $PM$  & $BW(MHz)$   \\ 
+            \hline
+            \cline{2-9}
+                    & {\bf ITE}\cite{PerfMap_ISQED2011} & 19432  & -  & 20 - 32.26 & $\leq 100$ & $\leq 0.65$  &  30\textdegree $\sim$  60\textdegree & $0.08 \sim 1.47$ \\
+            \cline{2-9}
+                    & $\text G\text A_{64}$ & 5958  & 3.26x  & 10 - 65.71 & 14 $\sim$ 100 & 0.1 $\sim$ 0.87 &   30\textdegree $\sim$ 72.85\textdegree   & $0.08 \sim 1.5$ \\
+            \cline{2-9}
+             umc65nm    & $\text P\text G\text A_{64}$  &1855 & 10.48x &  10 $\sim$ 91 & 28 $\sim$ 100  &  0.1 $\sim$ 1 & 30\textdegree $\sim$ 66\textdegree   & $0.1 \sim 1.5$  \\
+             \cline{2-9}
+                    & $\text P\text G\text A_{256}$  & 7992 & 2.43x  & 10 $\sim$ 91 & 14 $\sim$ 100 & 0.1 $\sim$ 1 &  30\textdegree $\sim$ 81\textdegree  & $0.1 \sim 1.5$ \\
+            \hline
+            \cline{2-9}
+                    & {\bf ITE}\cite{PerfMap_ISQED2011} &  15285 & - & $20 \sim 46.77$ & $\leq 100$ &$\leq 0.65$  & 30\textdegree $\sim$ 60\textdegree &$0.08 \sim 1.47$  \\
+            \cline{2-9}
+                    & $\text G\text A_{64}$   & 4858  & 3.15x& 10 $\sim$ 145 & $14 \sim 100$ & 0.23 $\sim$ 1 &   38.57\textdegree $\sim$ 72.85\textdegree   &0.1 $\sim$ 1 \\
+            \cline{2-9}
+             umc90nm    & $\text P\text G\text A_{64}$ & 1813 & 8.43x &  10 $\sim$ 118 & 14 $\sim$ 85  &  0.1 $\sim$ 0.75 & 30\textdegree $\sim$ 81\textdegree & 0.1 $\sim$ 1.5  \\
+             \cline{2-9}
+                    & $\text P\text G\text A_{256}$  & 4037 & 3.79x & 10 - 400 & 1.28 - 30 & 0.25 - 0.89 &  30\textdegree $\sim$ 60\textdegree & 0.48 $\sim$ 1.5 \\
+            \hline
+            \cline{2-9}
+                    & {\bf ITE}\cite{PerfMap_ISQED2011} & 19488 & -   & 20 $\sim$ 34.15 & $\leq 0.1$ & $\leq 0.91$  & 30\textdegree $\sim$ 60\textdegree  & 0.08 $\sim$ 1.47 \\
+            \cline{2-9}
+                    & $\text G\text A_{64}$  & 5918  & 3.29x &10 - 74.29 & 0.05 - 29.7 & 0.12 - 1.03 &  30\textdegree $\sim$ 60\textdegree   & 0.48 $\sim$ 1.5 \\
+            \cline{2-9}
+             tsmc90nm    & $\text P\text G\text A_{64}$ & 2805 & 6.94x &  10 - 74.29 & 0.14 - 28.68  &  0.18 - 1.03 & 30\textdegree $\sim$ 60\textdegree& 0.48 $\sim$ 1.5 \\
+             \cline{2-9}
+                    & $\text P\text G\text A_{256}$  & 7108 & 2.74x  & 10 - 74.29 & 0.13 - 29.69 & 0.17 - 0.96 &  30\textdegree $\sim$ 60\textdegree & 0.48 $\sim$ 1.5 \\
+            \hline
+
+        \end{tabular}
+        \end{small}
+        }
+        \end{lrbox}
+        \scalebox{0.8}{\usebox{\tablebox}}
+      \end{center}
+    \end{sidewaystable} 
+
+
+    Table~\ref{table:stat} shows the statistics of the two circuits including the components of each and the typical performance specifications. Table~\ref{table:PopulationResult} show the table with sideway
+      
+    
+
+    
